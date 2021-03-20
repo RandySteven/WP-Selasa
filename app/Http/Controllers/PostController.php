@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     public function create(){
-        return view('post.create');
+        $categories = Category::get();
+        $tags = Tag::get();
+        return view('post.create', compact('categories', 'tags'));
     }
 
     public function store(Request $request){
@@ -20,13 +24,13 @@ class PostController extends Controller
         // ]);
         $request->validate([
             'title' => 'required|min:5|max:20',
-            'price' => 'required|numeric',
             'desc' => 'required|min:5'
         ]);
         $data = $request->all();
         $data['slug'] = \Str::slug($request->title);
-        Post::create($data);
-
+        $data['category_id'] = $request->get('category_id');
+        $post = auth()->user()->posts()->create($data);
+        $post->tags()->attach($request->get('tags'));
         return redirect('/')->with('success', 'Data insert success');
     }
 

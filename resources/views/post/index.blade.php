@@ -14,13 +14,25 @@
                     <div class="card-body">
                       <h5 class="card-title">{{ $post->title }}</h5>
                       <h6 class="card-subtitle mb-2 text-muted">{{ $post->created_at->diffForHumans() }}</h6>
+                      <a href="{{ route('category', $post->category) }}">{{ $post->category->category }}</a>
                       <p class="card-text">{{ Str::limit($post->desc, 120, '...') }} <a href="{{ route('post.show', $post) }}">Read more</a></p>
-                      <a href="{{ route('post.edit', $post) }}" class="btn btn-success">Edit</a>
-                    <form action="{{ route('post.delete',$post) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">DELETE</button>
-                    </form>
+                      @auth
+                        @if (Auth::user()->id == $post->user_id)
+                            <div class="row">
+                                <div class="col">
+                                    <a href="{{ route('post.edit', $post) }}" class="btn btn-success">Edit</a>
+                                </div>
+                                <div class="col">
+                                    <form action="{{ route('post.delete',$post) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">DELETE</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        @endif
+                      @endauth
                     </div>
                   </div>
             </div>
