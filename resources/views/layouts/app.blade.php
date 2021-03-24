@@ -33,7 +33,15 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item {{ request()->is('/') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('welcome') }}">Home</a>
+                          </li>
+                          <li class="nav-item {{ request()->is('/post/create') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('post.create') }}">Create</a>
+                          </li>
+                          <li class="nav-item {{ request()->is('/about') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('about') }}">About</a>
+                          </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -45,7 +53,7 @@
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
-                            
+
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
