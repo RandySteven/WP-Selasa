@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Post')
+
 @section('content')
 <div class="container">
     <form action="{{ route('search') }}" method="GET">
