@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddImagePosts extends Migration
+class AddImageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddImagePosts extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->string('image')->nullable();
+            $table->string('image')->after('slug')->nullable();
         });
     }
 

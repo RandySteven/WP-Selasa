@@ -4,16 +4,12 @@
 
 @section('content')
 <div class="container">
-    <form action="{{ route('search') }}" method="GET">
-        @csrf
-        <input type="text" name="search" class="input-form" id="">
-        <button type="submit">Search</button>
-    </form>
     <div class="row">
         @foreach ($posts as $post)
             <div class="col-4">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
+                        <img src="{{ asset('storage/'.$post->image) }}" width="250" height="200" alt="{{ $post->image }}">
                       <h5 class="card-title">{{ $post->title }}</h5>
                       <h6 class="card-subtitle mb-2 text-muted">{{ $post->created_at->diffForHumans() }}</h6>
                       <a href="{{ route('category', $post->category) }}">{{ $post->category->category }}</a>

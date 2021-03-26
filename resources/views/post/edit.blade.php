@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <form method="POST" action="{{ route('post.update', $post) }}">
+    <form method="POST" action="{{ route('post.update', $post) }}" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <div class="form-group">
@@ -17,13 +17,24 @@
       @enderror
         </div>
         <div class="form-group">
-            <label for="exampleFormControlInput1">Price</label>
-            <input type="text" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ $post->price }}" id="exampleFormControlInput1" placeholder="Price">
-            @error('price')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-        @enderror
+            <label for="exampleFormControlInput1">Image</label>
+            <input type="file" class="form-control" name="image">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Category</label>
+            <select name="category_id" id="" class="form-control">
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" {{ $post->category_id == $category->id ? 'selected' : '' }}>{{ $category->category }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Category</label>
+            <select name="tags[]" multiple id="" class="form-control" multiple>
+                @foreach ($tags as $tag)
+                    <option value="{{ $tag->id }}">{{ $tag->tag }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
           <label for="exampleFormControlTextarea1">Description</label>

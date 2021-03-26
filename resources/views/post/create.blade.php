@@ -3,12 +3,21 @@
 @section('title', 'Create Post')
 
 @section('content')
-<form method="POST" action="{{ route('post.store') }}">
+<form method="POST" action="{{ route('post.store') }}" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
       <label for="exampleFormControlInput1">Title</label>
       <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="exampleFormControlInput1" placeholder="Title">
         @error('title')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Image</label>
+        <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
+        @error('image')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
@@ -24,7 +33,7 @@
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Category</label>
-        <select name="tags[]" multiple id="" class="form-control">
+        <select name="tags[]" multiple id="" class="form-control" multiple>
             @foreach ($tags as $tag)
                 <option value="{{ $tag->id }}">{{ $tag->tag }}</option>
             @endforeach

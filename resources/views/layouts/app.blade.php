@@ -84,7 +84,20 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                <form action="{{ route('search') }}" method="GET">
+                    @csrf
+                    <div class="row">
+                        <div class="col-10">
+                            <input type="text" name="search" class="form-control" id="">
+                        </div>
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </form>
+                @yield('content')
+            </div>
         </main>
     </div>
 </body>

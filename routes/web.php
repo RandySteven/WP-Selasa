@@ -42,7 +42,7 @@ Route::get('', [PostController::class, 'index'])->name('welcome');
 
 Route::middleware('auth')->group(function(){
     Route::prefix('post')->group(function(){
-        Route::get('create', [PostController::class, 'create'])->name('post.create')->middleware('verified');
+        Route::get('create', [PostController::class, 'create'])->name('post.create');
         Route::post('create', [PostController::class, 'store'])->name('post.store');
         Route::get('post/{post:slug}', [PostController::class, 'show'])->name('post.show')->withoutMiddleware('auth');
         Route::get('post-edit/{post:slug}', [PostController::class, 'edit'])->name('post.edit');
