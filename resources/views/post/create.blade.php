@@ -32,7 +32,7 @@
         </select>
     </div>
     <div class="form-group">
-        <label for="exampleFormControlInput1">Category</label>
+        <label for="exampleFormControlInput1">Tag</label>
         <select name="tags[]" multiple id="" class="form-control" multiple>
             @foreach ($tags as $tag)
                 <option value="{{ $tag->id }}">{{ $tag->tag }}</option>

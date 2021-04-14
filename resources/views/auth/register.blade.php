@@ -40,6 +40,13 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="" class="col-md-4 col-form-label text-md-right">Role</label>
+                            @foreach ($roles as $role)
+                                <input type="radio" class="py-4" name="role_id" value="{{ $role->id }}" id="{{ $role->id }}"> <label for="{{ $role->id }}">{{ $role->name }}</label>
+                            @endforeach
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">

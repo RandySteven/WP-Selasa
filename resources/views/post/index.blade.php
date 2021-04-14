@@ -15,7 +15,7 @@
                       <a href="{{ route('category', $post->category) }}">{{ $post->category->category }}</a>
                       <p class="card-text">{{ Str::limit($post->desc, 120, '...') }} <a href="{{ route('post.show', $post) }}">Read more</a></p>
                       @auth
-                        @if (Auth::user()->id == $post->user_id)
+                        @if (Auth::user()->id == $post->user_id || Auth::user()->hasRole('Admin'))
                             <div class="row">
                                 <div class="col">
                                     <a href="{{ route('post.edit', $post) }}" class="btn btn-success">Edit</a>
@@ -26,7 +26,6 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">DELETE</button>
                                     </form>
-
                                 </div>
                             </div>
                         @endif

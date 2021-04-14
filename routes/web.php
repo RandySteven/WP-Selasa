@@ -39,6 +39,7 @@ Route::view('/about', 'about')->name('about');
 Route::view('/contact', 'contact');
 
 Route::get('', [PostController::class, 'index'])->name('welcome');
+Auth::routes();
 
 Route::middleware('auth')->group(function(){
     Route::prefix('post')->group(function(){
@@ -55,6 +56,5 @@ Route::get('search-post', [SearchController::class, 'show'])->name('search');
 Route::get('category/{category:slug}', [CategoryController::class, 'show'])->name('category');
 Route::get('tag/{tag:slug}', [TagController::class, 'show'])->name('tag');
 
-Auth::routes(['verify'=>true]);
-
+// Auth::routes(['verify'=>true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
